@@ -41,11 +41,11 @@ object HttpTools {
         try {
             val reader = JSONObject(jsonStr)
 
-//            try {
-               // ret.isRunMode =
-//            } catch (e: JSONException) {
-//                Log.i(Constants.MAH_ANDROID_UPDATER_LOG_TAG, "MAH Updater is_run_mode is not available")
-//            }
+            //            try {
+            // ret.isRunMode =
+            //            } catch (e: JSONException) {
+            //                Log.i(Constants.MAH_ANDROID_UPDATER_LOG_TAG, "MAH Updater is_run_mode is not available")
+            //            }
 
             return ProgramInfo(
                     name = reader.getString("name"),

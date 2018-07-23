@@ -9,7 +9,7 @@ import com.mobapphome.mahandroidupdater.R
 import java.io.IOException
 
 class Updater {
-    internal var updaterListiner: UpdaterListener? = null
+    internal var updaterListener: UpdaterListener? = null
     var loading = false
 
     fun updateProgramList(act: Activity) {
@@ -40,10 +40,9 @@ class Updater {
                     val json = gson.toJson(programInfo)
                     MAHUpdaterController.sharedPref!!.edit().putString(Constants.MAH_UPD_PROGRAM_INFO, json).apply()
 
-                    if (updaterListiner != null) {
-                        Log.i(Constants.MAH_ANDROID_UPDATER_LOG_TAG, "UpdateListener = $updaterListiner")
-                        updaterListiner!!.
-                                onResponse(programInfo)
+                    if (updaterListener != null) {
+                        Log.i(Constants.MAH_ANDROID_UPDATER_LOG_TAG, "UpdateListener = $updaterListener")
+                        updaterListener!!.onResponse(programInfo)
                     }
                     loading = false
                 } catch (e: IOException) {
@@ -60,13 +59,13 @@ class Updater {
                     val resultError = StringBuilder()
                     resultError.append(act.resources.getString(
                             R.string.mah_android_upd_internet_update_error))
-                    if (updaterListiner != null) {
+                    if (updaterListener != null) {
                         val gson = Gson()
                         val json = MAHUpdaterController.sharedPref?.getString(Constants.MAH_UPD_PROGRAM_INFO, null)
                         val programInfo = gson.fromJson(json, ProgramInfo::class.java)
 
                         //Bura bax "?: ProgramInfo()" yazmisham. Onun yerinde bashqa shey ola biler. test ucn qoyusham
-                        updaterListiner!!.onResponse(programInfo ?: ProgramInfo(), resultError.toString())
+                        updaterListener!!.onResponse(programInfo ?: ProgramInfo(), resultError.toString())
                     }
                     loading = false
                 }

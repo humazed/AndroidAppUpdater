@@ -1,10 +1,5 @@
 package com.mobapphome.mahandroidupdater
 
-/**
- * Created by settar on 7/12/16.
- */
-
-
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
@@ -25,29 +20,28 @@ import com.mobapphome.mahandroidupdater.tools.MAHUpdaterController
 import com.mobapphome.mahandroidupdater.tools.ProgramInfo
 import kotlinx.android.synthetic.main.mah_restricter_dlg.*
 
-class MAHRestricterDlg private constructor() : DialogFragment() {
+class MAHResistorDialog : DialogFragment() {
 
-    internal var programInfo: ProgramInfo? = null
-    internal var type: DlgModeEnum? = null
+    private var programInfo: ProgramInfo? = null
+    private var type: DlgModeEnum? = null
 
-    internal var btnInfoVisibility: Boolean = false
-    internal var btnInfoMenuItemTitle: String? = null
-    internal var btnInfoActionURL: String? = null
+    private var btnInfoVisibility: Boolean = false
+    private var btnInfoMenuItemTitle: String? = null
+    private var btnInfoActionURL: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NORMAL, R.style.MAHRestricterDlg)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.i(Constants.MAH_ANDROID_UPDATER_LOG_TAG, "MAH Restricter Dlg Created ")
         val gson = Gson()
-        programInfo = gson.fromJson(arguments.getString("programInfo"), ProgramInfo::class.java)
-        type = arguments.getSerializable("type") as DlgModeEnum
-        btnInfoVisibility = arguments.getBoolean("btnInfoVisibility")
-        btnInfoMenuItemTitle = arguments.getString("btnInfoMenuItemTitle")
-        btnInfoActionURL = arguments.getString("btnInfoActionURL")
+        programInfo = gson.fromJson(arguments?.getString("programInfo"), ProgramInfo::class.java)
+        type = arguments!!.getSerializable("type") as DlgModeEnum
+        btnInfoVisibility = arguments!!.getBoolean("btnInfoVisibility")
+        btnInfoMenuItemTitle = arguments!!.getString("btnInfoMenuItemTitle")
+        btnInfoActionURL = arguments!!.getString("btnInfoActionURL")
 
         Log.i(Constants.MAH_ANDROID_UPDATER_LOG_TAG, "Updateinfo from bundle " + programInfo?.updateInfo)
 
@@ -58,17 +52,15 @@ class MAHRestricterDlg private constructor() : DialogFragment() {
         dialog.setOnKeyListener { dialog, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
                 onClose()
-                true
             }
             false
         }
 
-        return inflater!!.inflate(R.layout.mah_restricter_dlg, container)
+        return inflater.inflate(R.layout.mah_restricter_dlg, container)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         tvUpdateInfo.text = programInfo?.updateInfo
         tvUpdateInfo.visibility = if (programInfo?.updateInfo != null) View.VISIBLE else View.GONE
@@ -80,7 +72,7 @@ class MAHRestricterDlg private constructor() : DialogFragment() {
         btnDontUpdate.setOnClickListener { onNo() }
         imgBtnInfo.setOnClickListener { v ->
             val itemIdForInfo = 1
-            val popup = PopupMenu(context, v)
+            val popup = PopupMenu(requireContext(), v)
             popup.menu.add(Menu.NONE, itemIdForInfo, 1, btnInfoMenuItemTitle)
 
             // registering popup with OnMenuItemClickListener
@@ -91,7 +83,7 @@ class MAHRestricterDlg private constructor() : DialogFragment() {
                 true
             }
 
-            popup.show()// showing popup menu
+            popup.show() // showing popup menu
         }
 
 
@@ -136,72 +128,68 @@ class MAHRestricterDlg private constructor() : DialogFragment() {
         tvInfoTxt.setControllerFont()
     }
 
-    fun onYes() =
-            when (type) {
-                DlgModeEnum.OPEN_NEW -> {
-                    val pack = activity.packageManager
-                    val app = pack.getLaunchIntentForPackage(programInfo?.uriCurrent)
-                    activity.startActivity(app)
+    fun onYes() = when (type) {
+        DlgModeEnum.OPEN_NEW -> {
+            val pack = requireActivity().packageManager
+            val app = pack.getLaunchIntentForPackage(programInfo?.uriCurrent)
+            requireActivity().startActivity(app)
+        }
+
+        DlgModeEnum.INSTALL, DlgModeEnum.UPDATE ->
+            if (!programInfo?.uriCurrent!!.isEmpty()) {
+                val marketIntent = Intent(Intent.ACTION_VIEW)
+                marketIntent.data = Uri.parse("market://details?id=" + programInfo?.uriCurrent)
+                try {
+                    requireActivity().startActivity(marketIntent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(requireContext(), getString(R.string.mah_android_upd_play_service_not_found), Toast.LENGTH_LONG).show()
+                    Log.e(Constants.MAH_ANDROID_UPDATER_LOG_TAG, getString(R.string.mah_android_upd_play_service_not_found) + e.message)
                 }
 
-                DlgModeEnum.INSTALL, DlgModeEnum.UPDATE ->
-                    if (!programInfo?.uriCurrent!!.isEmpty()) {
-                        val marketIntent = Intent(Intent.ACTION_VIEW)
-                        marketIntent.data = Uri.parse("market://details?id=" + programInfo?.uriCurrent)
-                        try {
-                            activity.startActivity(marketIntent)
-                        } catch (e: ActivityNotFoundException) {
-                            Toast.makeText(context, getString(R.string.mah_android_upd_play_service_not_found), Toast.LENGTH_LONG).show()
-                            Log.e(Constants.MAH_ANDROID_UPDATER_LOG_TAG, getString(R.string.mah_android_upd_play_service_not_found) + e.message)
-                        }
-
-                    } else {
-                    }
-                DlgModeEnum.TEST -> {
-                }
-                else -> {
-                }
+            } else {
             }
+        DlgModeEnum.TEST -> {
+        }
+        else -> {
+        }
+    }
 
 
-    fun onNo() =
-            when (type) {
-                DlgModeEnum.OPEN_NEW -> {
-                    val intent = Intent(Intent.ACTION_DELETE)
-                    intent.data = Uri.parse("package:" + activity.packageName)
-                    activity.startActivity(intent)
-                }
-                DlgModeEnum.TEST, DlgModeEnum.INSTALL, DlgModeEnum.UPDATE -> onClose()
-                else -> {
-                }
-            }
+    fun onNo() = when (type) {
+        DlgModeEnum.OPEN_NEW -> {
+            val intent = Intent(Intent.ACTION_DELETE)
+            intent.data = Uri.parse("package:" + requireActivity().packageName)
+            requireActivity().startActivity(intent)
+        }
+        DlgModeEnum.TEST, DlgModeEnum.INSTALL, DlgModeEnum.UPDATE -> onClose()
+        else -> {
+        }
+    }
 
 
     fun onClose() {
         dismissAllowingStateLoss()
         MAHUpdaterController.end()
-        activity.finish()
+        requireActivity().finish()
     }
 
-    private fun showMAHlib() =
-            try {
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(btnInfoActionURL))
-                context.startActivity(browserIntent)
-            } catch (nfe: ActivityNotFoundException) {
-                val str = "You haven't set correct url to btnInfoActionURL, your url = " + btnInfoActionURL
-                Toast.makeText(context, str, Toast.LENGTH_LONG).show()
-                Log.d(Constants.MAH_ANDROID_UPDATER_LOG_TAG, str, nfe)
-            }
+    private fun showMAHlib() = try {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(btnInfoActionURL))
+        requireContext().startActivity(browserIntent)
+    } catch (nfe: ActivityNotFoundException) {
+        val str = "You haven't set correct url to btnInfoActionURL, your url = " + btnInfoActionURL
+        Toast.makeText(requireContext(), str, Toast.LENGTH_LONG).show()
+        Log.d(Constants.MAH_ANDROID_UPDATER_LOG_TAG, str, nfe)
+    }
 
 
     companion object {
-
         fun newInstance(programInfo: ProgramInfo,
                         type: DlgModeEnum,
                         btnInfoVisibility: Boolean,
                         btnInfoMenuItemTitle: String?,
-                        btnInfoActionURL: String?): MAHRestricterDlg {
-            val dialog = MAHRestricterDlg()
+                        btnInfoActionURL: String?): MAHResistorDialog {
+            val dialog = MAHResistorDialog()
             val args = Bundle()
             val gson = Gson()
 
@@ -214,4 +202,4 @@ class MAHRestricterDlg private constructor() : DialogFragment() {
             return dialog
         }
     }
-}// Empty constructor required for DialogFragment
+}

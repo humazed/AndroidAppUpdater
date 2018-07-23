@@ -2,14 +2,12 @@ package com.mobapphome.mahandroidupdater.tools
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Typeface
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.util.Log
-import android.widget.TextView
 
-import com.mobapphome.mahandroidupdater.MAHRestricterDlg
+import com.mobapphome.mahandroidupdater.MAHResistorDialog
 import com.mobapphome.mahandroidupdater.MAHUpdaterDlg
 import com.mobapphome.mahandroidupdater.R
 
@@ -72,7 +70,7 @@ object MAHUpdaterController {
         sharedPref = act.getPreferences(Context.MODE_PRIVATE)
 
         val updater = Updater()
-        updater.updaterListiner = object : UpdaterListener {
+        updater.updaterListener = object : UpdaterListener {
 
             override fun onResponse(programInfo: ProgramInfo, errorStr: String) {
                 when {
@@ -117,7 +115,7 @@ object MAHUpdaterController {
         }
 
         val updater = Updater()
-        updater.updaterListiner = object : UpdaterListener {
+        updater.updaterListener = object : UpdaterListener {
 
             override fun onResponse(programInfo: ProgramInfo, errorStr: String) {
 
@@ -155,7 +153,7 @@ object MAHUpdaterController {
 
     private fun showRestricterDlg(act: FragmentActivity, mode: DlgModeEnum, programInfo: ProgramInfo) {
         showDlg(act,
-                MAHRestricterDlg.newInstance(programInfo, mode, btnInfoVisibility, btnInfoMenuItemTitle, btnInfoActionURL),
+                MAHResistorDialog.newInstance(programInfo, mode, btnInfoVisibility, btnInfoMenuItemTitle, btnInfoActionURL),
                 "fragment_restricter_dlg")
     }
 
