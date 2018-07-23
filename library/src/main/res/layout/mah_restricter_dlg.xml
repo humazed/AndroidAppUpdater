@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="2000dp"
     android:minWidth="2000dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.mobapphome.mahandroidupdater.MAHResistorDialog">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,17 +52,6 @@
                 android:text="@string/noun_mah_android_upd_dlg_title"
                 android:textColor="@android:color/white"
                 android:textSize="19sp"/>
-
-            <ImageButton
-                android:id="@+id/imgBtnInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:paddingBottom="4dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="4dp"
-                android:src="@drawable/ic_mah_info"/>
         </LinearLayout>
 
         <LinearLayout

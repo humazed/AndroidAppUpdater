@@ -7,9 +7,11 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.support.v7.widget.PopupMenu
 import android.util.Log
-import android.view.*
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import com.google.gson.Gson
 import com.mobapphome.mahandroidupdater.commons.setControllerFont
@@ -64,27 +66,10 @@ class MAHUpdaterDlg : DialogFragment() {
         btnDontUpdate.text = resources.getText(R.string.mah_android_upd_dlg_btn_no_later_txt)
 
         tvUpdateInfo.visibility = if (programInfo?.updateInfo != null) View.VISIBLE else View.GONE
-        imgBtnInfo.visibility = if (btnInfoVisibility) View.VISIBLE else View.INVISIBLE
 
         btnUpdate.setOnClickListener { onYes() }
         btnDontUpdate.setOnClickListener { onNo() }
         imgBtnCancel.setOnClickListener { onNo() }
-        imgBtnInfo.setOnClickListener { v ->
-            val itemIdForInfo = 1
-            val popup = PopupMenu(requireContext(), v)
-            popup.menu.add(Menu.NONE, itemIdForInfo, 1, btnInfoMenuItemTitle)
-
-            // registering popup with OnMenuItemClickListener
-            popup.setOnMenuItemClickListener { item ->
-                if (item.itemId == itemIdForInfo) {
-                    showMAHlib()
-                }
-                true
-            }
-
-            popup.show() // showing popup menu
-        }
-
 
         when (type) {
             DlgModeEnum.UPDATE -> {

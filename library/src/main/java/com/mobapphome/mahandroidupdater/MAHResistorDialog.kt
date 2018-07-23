@@ -7,10 +7,12 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.support.v7.widget.PopupMenu
 import android.util.Log
 import android.util.TypedValue
-import android.view.*
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import com.google.gson.Gson
 import com.mobapphome.mahandroidupdater.commons.setControllerFont
@@ -64,28 +66,10 @@ class MAHResistorDialog : DialogFragment() {
 
         tvUpdateInfo.text = programInfo?.updateInfo
         tvUpdateInfo.visibility = if (programInfo?.updateInfo != null) View.VISIBLE else View.GONE
-        imgBtnInfo.visibility = if (btnInfoVisibility) View.VISIBLE else View.INVISIBLE
-
 
         imgBtnCancel.setOnClickListener { onClose() }
         btnUpdate.setOnClickListener { onYes() }
         btnDontUpdate.setOnClickListener { onNo() }
-        imgBtnInfo.setOnClickListener { v ->
-            val itemIdForInfo = 1
-            val popup = PopupMenu(requireContext(), v)
-            popup.menu.add(Menu.NONE, itemIdForInfo, 1, btnInfoMenuItemTitle)
-
-            // registering popup with OnMenuItemClickListener
-            popup.setOnMenuItemClickListener { item ->
-                if (item.itemId == itemIdForInfo) {
-                    showMAHlib()
-                }
-                true
-            }
-
-            popup.show() // showing popup menu
-        }
-
 
         when (type) {
             DlgModeEnum.UPDATE -> {
@@ -177,7 +161,7 @@ class MAHResistorDialog : DialogFragment() {
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(btnInfoActionURL))
         requireContext().startActivity(browserIntent)
     } catch (nfe: ActivityNotFoundException) {
-        val str = "You haven't set correct url to btnInfoActionURL, your url = " + btnInfoActionURL
+        val str = "You haven't set correct url to btnInfoActionURL, your url = $btnInfoActionURL"
         Toast.makeText(requireContext(), str, Toast.LENGTH_LONG).show()
         Log.d(Constants.MAH_ANDROID_UPDATER_LOG_TAG, str, nfe)
     }
