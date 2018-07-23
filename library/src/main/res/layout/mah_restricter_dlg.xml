@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="2000dp"
     android:minWidth="2000dp"
     android:orientation="vertical">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,22 +21,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/mah_dlg_title_lyt_shape"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingBottom="4dp"
-            android:paddingTop="4dp"
-            android:gravity="center_vertical">
-
+            android:paddingTop="4dp">
 
             <ImageButton
                 android:id="@+id/imgBtnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_mah_cancel"
                 android:background="@android:color/transparent"
-                android:paddingTop="4dp"
                 android:paddingBottom="4dp"
                 android:paddingLeft="8dp"
-                android:paddingRight="8dp" />
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:src="@drawable/ic_mah_cancel"/>
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -52,18 +51,17 @@
                 android:textColor="@android:color/white"
                 android:textSize="19sp"/>
 
-
             <ImageButton
                 android:id="@+id/imgBtnInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_mah_info"
                 android:background="@android:color/transparent"
-                android:paddingTop="4dp"
                 android:paddingBottom="4dp"
                 android:paddingLeft="8dp"
-                android:paddingRight="8dp"  />
-
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:src="@drawable/ic_mah_info"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +90,7 @@
                     android:text="Info"
                     android:textColor="@color/mah_android_upd_info_txt_color"
                     android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tvUpdateInfo"
@@ -106,9 +104,8 @@
                     android:text="Update info"
                     android:textColor="@color/mah_android_upd_info_txt_color"
                     android:textSize="17sp"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"/>
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -125,31 +122,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="0.7"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <Button
                         android:id="@+id/btnDontUpdate"
                         style="@style/MAHBtn1Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minWidth="200dp"
                         android:gravity="center"
-                        android:text="Later btn" />
+                        android:minWidth="200dp"
+                        android:text="Later btn"/>
 
                     <Button
                         android:id="@+id/btnUpdate"
                         style="@style/MAHBtn2Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minWidth="200dp"
                         android:gravity="center"
-                        android:text="Update btn" />
+                        android:minWidth="200dp"
+                        android:text="Update btn"/>
                 </LinearLayout>
-
-
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

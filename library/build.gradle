@@ -2,41 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'mah-android-updater'
-
-    publishedGroupId = 'com.mobapphome.library'
-    libraryName = 'MAHAndroidUpdater'
-    artifact = 'mah-android-updater'
-
-    libraryDescription = 'MAHAndroidUpdater is library for updating android apps installed to android device. ' +
-            'By it\'s help old application gets update from Google Play Market.'
-
-    siteUrl = 'https://github.com/hummatli/MAHAndroidUpdater'
-    gitUrl = 'https://github.com/hummatli/MAHAndroidUpdater.git'
-
-    //beta versiyani yazanda bele yaz . Meselen '1.1.7-beta.1'  Arxasina noqte qoyma o ishlemir. Bele: '1.1.7-beta.1.'
-    // bu jCeneter uplaod olur amma applar istifade ede bilmir
-    libraryVersion = '1.1.7'
-
-    developerId = 'hummatli'
-    developerName = 'Sattar Hummatli'
-    developerEmail = 'settarxan@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdkVersion 16
+        targetSdkVersion 27
     }
 
     buildTypes {
@@ -53,14 +24,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'org.jsoup:jsoup:1.9.2'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-}
-
-apply from: 'conf_for_maven/installv1.gradle'
-apply from: 'conf_for_maven/bintrayv1.gradle'
-repositories {
-    mavenCentral()
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'org.jsoup:jsoup:1.11.3'
 }
