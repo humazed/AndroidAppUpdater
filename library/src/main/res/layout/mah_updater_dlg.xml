@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="20dp"
@@ -29,7 +30,8 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingTop="4dp"
-            android:src="@drawable/ic_mah_cancel"/>
+            android:src="@drawable/ic_mah_cancel"
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/tvTitle"
@@ -38,8 +40,8 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingBottom="0dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="5dp"
             android:paddingTop="0dp"
             android:text="@string/noun_mah_android_upd_dlg_title"
             android:textColor="@android:color/white"
@@ -55,8 +57,7 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingTop="4dp"
-            android:src="@drawable/ic_mah_info"
-            android:visibility="gone"/>
+            android:src="@drawable/ic_mah_info"/>
 
     </LinearLayout>
 
@@ -70,7 +71,7 @@
             android:id="@+id/tvInfoTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:gravity="start"
             android:paddingBottom="0dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -84,7 +85,7 @@
             android:id="@+id/tvUpdateInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:gravity="start"
             android:paddingBottom="0dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -110,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Later btn"
+                android:text="Later"
                 android:textAllCaps="true"
                 android:textColor="@color/mah_android_upd_upd_dlg_btn_text_color"
                 android:textSize="15sp"/>
@@ -121,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Update btn"
+                android:text="Update"
                 android:textAllCaps="true"
                 android:textColor="@color/mah_android_upd_upd_dlg_btn_text_color"
                 android:textSize="15sp"/>
