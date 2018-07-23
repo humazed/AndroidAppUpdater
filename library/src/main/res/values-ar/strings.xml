@@ -10,26 +10,26 @@
 
     <string name="app_name">MAHAndroidUpdater</string>
 
-    <!-- noun --> <string name="noun_mah_android_upd_dlg_title">Update information</string>
+    <!-- noun --> <string name="noun_mah_android_upd_dlg_title">معلومات (عن) التحديث</string>
     <!-- Button texts-->
-    <string name="mah_android_upd_dlg_btn_no_later_txt">Later</string>
-    <!--command verb--> <string name="cmnd_verb_mah_android_upd_dlg_btn_no_close_txt">Close</string>
-    <!--command verb--> <string name="cmnd_verb_mah_android_upd_dlg_btn_yes_update_txt">Update</string>
-    <!--command verb--> <string name="cmnd_verb_mah_android_upd_dlg_btn_yes_install_txt">Install</string>
-    <string name="mah_android_upd_dlg_btn_yes_open_new_txt">Open new version</string>
-    <!--command verb--> <string name="cmnd_verb_mah_android_upd_dlg_btn_no_uninstall_old_txt">Uninstall old</string>
+    <string name="mah_android_upd_dlg_btn_no_later_txt">لاحقا</string>
+    <!--command verb--> <string name="cmnd_verb_mah_android_upd_dlg_btn_no_close_txt">إغلاق</string>
+    <!--command verb--> <string name="cmnd_verb_mah_android_upd_dlg_btn_yes_update_txt">تحديث</string>
+    <!--command verb--> <string name="cmnd_verb_mah_android_upd_dlg_btn_yes_install_txt">تثبيت</string>
+    <string name="mah_android_upd_dlg_btn_yes_open_new_txt">فتح نسخة جديدة</string>
+    <!--command verb--> <string name="cmnd_verb_mah_android_upd_dlg_btn_no_uninstall_old_txt">إلغاء تحديث النسخة القديمة</string>
 
     <!-- Info texts-->
-    <string name="mah_android_upd_updater_info_install">Application has moved to new address. Please install newer version</string>
-    <string name="mah_android_upd_updater_info_update">New version is available. Please update application</string>
-    <string name="mah_android_upd_restricter_info_install">This is old version and does not operate. An application has moved to new address. \nPlease install newer version</string>
+    <string name="mah_android_upd_updater_info_install">تم تغيير عنوان التطبيق إلى عنوان جديد. ثبت النسخة الأجدد، من فضلك</string>
+    <string name="mah_android_upd_updater_info_update">نسخة جديدة متاحة، حدث التطبيق من فضلك</string>
+    <string name="mah_android_upd_restricter_info_install">هذه نسخة قديمة ولا تعمل.\n تطبيق تم نقله إلى عنوان جديد،\n وثبت النسخة الأجدد من فضلك</string>
     <string name="mah_android_upd_restricter_info_update">This is old version and does not operate. Please update application</string>
-    <string name="mah_android_upd_restricter_info_open_new_version">This is old version and does not operate. Please open new version</string>
+    <string name="mah_android_upd_restricter_info_open_new_version">هذه نسخة قديمة ولا تعمل. افتح النسخة الجديدة من فضلك</string>
 
     <!-- Additional information-->
-    <string name="mah_android_upd_internet_update_error">Check your internet connection</string>
-    <string name="mah_android_upd_play_service_not_found">Install Google Play Services to update application</string>
-    <string name="mah_android_upd_info_popup_text">Please update for the best experience</string>
+    <string name="mah_android_upd_internet_update_error">تأكد من اتصال الإنترنت</string>
+    <string name="mah_android_upd_play_service_not_found">ثَبت Google play services لكي تُحدث التطبيق</string>
+    <string name="mah_android_upd_info_popup_text">حَدثه من فضلك، لأجل أفضل تجربة.</string>
 
 </resources>
 
